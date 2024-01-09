@@ -1,5 +1,6 @@
 <template>
   <div class="max-w-[800px] mx-auto py-8">
+    <Loader v-if="isLoading" />
     <div class="pb-0">
       <h1 class="text-4xl font-bold mb-4 text-orange-500">
         {{ meal.strMeal }}
@@ -57,18 +58,23 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
 import axiosClient from "../axiosClient";
 import YoutubeButton from "../components/YoutubeButton.vue";
+import Loader from "../components/Loader.vue";
+import store from "../store";
 
 const route = useRoute();
 
 onMounted(() => {
+  store.commit("setIsLoading", true);
   axiosClient.get(`/lookup.php?i=${route.params.id}`).then(({ data }) => {
     meal.value = data.meals[0] || {};
+    store.commit("setIsLoading", false);
   });
 });
 
+const isLoading = computed(() => store.state.isLoading);
 const meal = ref({});
 </script>

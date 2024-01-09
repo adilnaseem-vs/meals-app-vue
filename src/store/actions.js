@@ -1,6 +1,7 @@
 import axiosClient from "../axiosClient";
 
 export function searchMeals({ commit }, keyword) {
+  commit("setIsLoading", true);
   axiosClient
     .get(`/search.php?s=${keyword}`)
     .then(({ data }) => {
@@ -10,15 +11,18 @@ export function searchMeals({ commit }, keyword) {
 }
 
 export function searchMealsByLetter({ commit }, letter) {
+  commit("setIsLoading", true);
   axiosClient
     .get(`/search.php?f=${letter}`)
     .then(({ data }) => {
+      console.log(data);
       commit("setMealsByLetter", data.meals);
     })
     .catch((err) => {});
 }
 
 export function searchMealsByIngredient({ commit }, ingredient) {
+  commit("setIsLoading", true);
   axiosClient
     .get(`/filter.php?i=${ingredient}`)
     .then(({ data }) => {
@@ -28,6 +32,7 @@ export function searchMealsByIngredient({ commit }, ingredient) {
 }
 
 export function randomMeal({ commit }) {
+  commit("setIsLoading", true);
   const meals = [];
   for (let i = 0; i < 10; i++) {
     axiosClient
@@ -35,7 +40,6 @@ export function randomMeal({ commit }) {
       .then(({ data }) => {
         meals[i] = data.meals;
         if (meals.length === 10) {
-          console.log(meals);
           commit("setRandomMeals", meals);
         }
       })
