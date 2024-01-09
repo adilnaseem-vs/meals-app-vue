@@ -1,7 +1,8 @@
 <template>
   <a
+    v-if="href"
     :href="href"
-    class="px-3 inline-block py-2 rounded border border-red-600  transition-colors cursor-pointer hover:bg-red-300"
+    class="px-3 inline-block py-2 rounded border border-red-600 transition-colors cursor-pointer hover:bg-red-300"
     target="_blank"
   >
     <slot></slot

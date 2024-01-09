@@ -1,4 +1,5 @@
 <template>
+  <Loader v-if="isLoading" />
   <div class="p-8 pb-0">
     <h1 class="text-4xl font-bold mb-4 text-orange-500">Current Special</h1>
   </div>
@@ -11,8 +12,10 @@
 import { computed, onMounted, ref } from "vue";
 import store from "../store";
 import MealItem from "../components/MealItem.vue";
+import Loader from "../components/Loader.vue";
 
 const randomMeals = computed(() => store.state.randomMeals);
+const isLoading = computed(() => store.state.isLoading);
 
 onMounted(async () => {
   store.dispatch("randomMeal");

@@ -63,3 +63,51 @@ const router = createRouter({
 });
 
 export default router;
+
+/*
+// Nested Routes
+
+const routes = [
+  {
+    path: '/user',
+    component: User,
+    children: [
+      {
+        // when /user/:id/profile is matched
+        path: ':id/profile',
+        component: UserProfile
+      },
+      {
+        // when /user/:id/posts is matched
+        path: ':id/posts',
+        component: UserPosts
+      }
+    ]
+  }
+];
+
+
+// User.vue
+<template>
+  <div>
+    <h1>User Component</h1>
+    <router-view></router-view> <!-- Nested outlet -->
+  </div>
+</template>
+
+// UserProfile.vue
+<template>
+  <div>
+    <h2>User Profile Component</h2>
+    <!-- User profile details here -->
+  </div>
+</template>
+
+// UserPosts.vue
+<template>
+  <div>
+    <h2>User Posts Component</h2>
+    <!-- User posts list here -->
+  </div>
+</template>
+*/
